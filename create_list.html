@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create List</title>
+</head>
+<body>
+
+    <p>Enter some text to add to the list</p>
+    <input id="new-text">
+    <button id="add-text">Add</button>
+    <button id="clear-list">Clear list</button>
+
+    <ul id="list-of-text"></ul>
+
+    <script>
+        let textInput = document.querySelector('#new-text')
+        let addButton = document.querySelector('#add-text')
+        let textList = document.querySelector('#list-of-text')
+        let clearList = document.querySelector('#clear-list')
+
+        let elementsInList = 0
+        let maxElements = 10
+
+        document.addEventListener('keyup', function (){
+            if (event.keyCode === 13){
+                addButton.click()
+            }
+        })
+
+        addButton.addEventListener('click', function () {
+            let newText = textInput.value
+
+            if (newText.length === 0){
+                return
+            }
+
+            if (elementsInList >= maxElements){
+                alert('Max elements reached')
+            }else if(textInput.value.length >= 50){
+                alert('Length bigger than 50, try again.')
+            }else {
+
+                let newListItem = document.createElement('li')
+                newListItem.innerHTML = newText
+
+                textList.appendChild(newListItem)
+                elementsInList++
+                textInput.value = ''
+            }
+
+        })
+
+        clearList.addEventListener('click',function (){
+            textList.innerHTML = ''
+            elementsInList = 0
+        })
+
+
+    </script>
+
+</body>
+</html>
